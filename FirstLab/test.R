@@ -43,3 +43,6 @@ x <- 1:16 # same as y
 y <- seq(1, 16) # same as x
 
 curve(x^2, to = 50, from = 10) # curvy plot?
+
+typeof(c(1, 2, 3)) # double
+typeof(1:3) # integer
