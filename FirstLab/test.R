@@ -16,7 +16,7 @@ typeof(4) # double
 typeof(4L) # integer
 
 (m <- matrix(c(1, 5, 6, 9), nrow = 2))
-apply(m, 2, mean) # apply mean function to the 2nd dimension of matrix m.
+apply(m, 2, mean) # apply mean function to the 2nd dimension (col) of matrix m.
 
 str(m)  # str() is an alternative function to display the summary of
         # the output produced, especially when the data set is huge.
