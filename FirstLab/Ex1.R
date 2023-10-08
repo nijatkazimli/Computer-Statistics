@@ -27,6 +27,7 @@ myList <- list(
   b <- list(list(b1 <- c(1, 4, 5), b2 <- c("ab", "cdef"))),
   c <- 4.6
 ); typeof(myList) # list
+
 print_nested_list <- function(my_list, indent = 0) {
   for (element in my_list) {
     if (is.list(element)) {
