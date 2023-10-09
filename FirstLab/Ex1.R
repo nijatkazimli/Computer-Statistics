@@ -98,8 +98,9 @@ rownames(M) <- c("row1", "row2", "row3")
 colnames(M) <- c("col1", "col2", "col3")
 print(M) # taskE
 
+taskFi <- M
+
 # vector way
-taskFi <- M[2, 3]
 taskFii <- M[2, ]
 taskFiii <- M[ , 1]
 logical_subset <- M == 2 | M == 3
