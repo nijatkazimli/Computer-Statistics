@@ -60,7 +60,7 @@ taskG <- paste(paste(a, collapse = " "), paste(b, collapse = " "))
 b <- b[2:length(b)]
 taskH <- paste(paste(a, collapse = " "), paste(b, collapse = " "), sep = ", ")
 
-# sep param - takes a elements from each vector a, b, and creates a new element 
+# sep param - takes elements from each vector a, b, and creates a new element 
 #                                                           having a separator
 # collapse param - the same but creates one string which contains all new 
 #                                                                     elements
