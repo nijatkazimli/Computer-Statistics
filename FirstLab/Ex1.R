@@ -84,3 +84,23 @@ for (i in taskG1) {
   cat("index: ", i, " number: ", x[i], "\n")
 } # taskI
 taskJ1 <- replace(x, x == 0, NA); taskJ2 <- sum(x)
+
+
+# Exercise 1.5
+matrix_elements <- c(1, 2, 3, 0, 1, 4, 5, 6, 0)
+M <- matrix(matrix_elements, nrow = 3, ncol = 3)
+taskA <- dim(M)
+taskB <- t(M)
+taskC <- M %*% M # matrix square operator. M^2 squares element-wise
+taskD <- sum(M)
+
+rownames(M) <- c("row1", "row2", "row3")
+colnames(M) <- c("col1", "col2", "col3")
+print(M) # taskE
+
+# vector way
+taskFi <- M[2, 3]
+taskFii <- M[2, ]
+taskFiii <- M[ , 1]
+logical_subset <- M == 2 | M == 3
+taskiv <- M[logical_subset]
