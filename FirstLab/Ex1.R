@@ -105,3 +105,8 @@ taskFii <- M[2, ]
 taskFiii <- M[ , 1]
 logical_subset <- M == 2 | M == 3
 taskiv <- M[logical_subset]
+
+# matrix way
+taskFiiM <- M[2, , drop = FALSE]
+taskFiiiM <- M[ , 1, drop = FALSE]
+taskFiv <- M * logical_subset
