@@ -107,6 +107,6 @@ logical_subset <- M == 2 | M == 3
 taskiv <- M[logical_subset]
 
 # matrix way
-taskFiiM <- M[2, , drop = FALSE]
-taskFiiiM <- M[ , 1, drop = FALSE]
+taskFiiM <- M[2, , drop = FALSE]    # drop param - whether to drop empty cols
+taskFiiiM <- M[ , 1, drop = FALSE]  # or rows
 taskFiv <- M * logical_subset
