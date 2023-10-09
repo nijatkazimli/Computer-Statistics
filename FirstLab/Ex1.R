@@ -64,3 +64,23 @@ taskH <- paste(paste(a, collapse = " "), paste(b, collapse = " "), sep = ", ")
 #                                                           having a separator
 # collapse param - the same but creates one string which contains all new 
 #                                                                     elements
+
+
+# Exercise 1.4
+x <- c(1, 2, -3.4, 0, 8.1, 1.9, 12, 0, -1)
+taskA <- length(x)
+taskB1 <- sort(x)       # ascending
+taskB2 <- rev(sort(x))  # descending
+# The difference between sort() and order() is that sort() returns a new
+# collection, keeping original, while order() changes the original collection.
+taskC <- sum(x)
+taskD1 <- min(x); taskD2 <- max(x)
+taskE1 <- cumsum(x); taskE2 <- cumprod(x); taskE3 <- cummin(x)
+taskE4 <- cummax(x)
+taskF <- taskC / seq_along(x) # The seq_along(x) is equivalent to 1:length(x)
+taskG1 <- which(x < 0); taskG2 <- x[taskG1]
+names(x) <- letters[1:length(x)] # taskH
+for (i in taskG1) {
+  cat("index: ", i, " number: ", x[i], "\n")
+} # taskI
+taskJ1 <- replace(x, x == 0, NA); taskJ2 <- sum(x)
