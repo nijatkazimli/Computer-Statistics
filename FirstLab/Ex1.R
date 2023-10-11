@@ -100,7 +100,7 @@ rownames(M) <- paste("row", 1:nrow(M), sep = "") # a more generic way, number
 colnames(M) <- paste("col", 1:ncol(M), sep = "") # of cols, rows doesn't matter
 print(M) # taskE
 
-taskFi <- M
+taskFi <- M[2, 3]
 
 # vector way
 taskFii <- M[2, ]
