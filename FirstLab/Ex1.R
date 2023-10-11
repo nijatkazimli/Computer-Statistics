@@ -77,7 +77,7 @@ taskC <- sum(x)
 taskD1 <- min(x); taskD2 <- max(x)
 taskE1 <- cumsum(x); taskE2 <- cumprod(x); taskE3 <- cummin(x)
 taskE4 <- cummax(x)
-taskF <- taskC / seq_along(x) # The seq_along(x) is equivalent to 1:length(x)
+taskF <- taskE1 / seq_along(x) # The seq_along(x) is equivalent to 1:length(x)
 taskG1 <- which(x < 0); taskG2 <- x[taskG1]
 names(x) <- letters[1:length(x)] # taskH
 for (i in taskG1) {
