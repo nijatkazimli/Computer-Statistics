@@ -94,8 +94,10 @@ taskB <- t(M)
 taskC <- M %*% M # matrix square operator. M^2 squares element-wise
 taskD <- sum(M)
 
-rownames(M) <- c("row1", "row2", "row3")
-colnames(M) <- c("col1", "col2", "col3")
+# rownames(M) <- c("row1", "row2", "row3")
+# colnames(M) <- c("col1", "col2", "col3")
+rownames(M) <- paste("row", 1:nrow(M), sep = "") # a more generic way, number
+colnames(M) <- paste("col", 1:ncol(M), sep = "") # of cols, rows doesn't matter
 print(M) # taskE
 
 taskFi <- M
@@ -110,3 +112,19 @@ taskiv <- M[logical_subset]
 taskFiiM <- M[2, , drop = FALSE]    # drop param - whether to drop empty cols
 taskFiiiM <- M[ , 1, drop = FALSE]  # or rows
 taskFiv <- M * logical_subset
+
+taskG <- M; taskG[taskG == 2] <- 12; taskG[taskG == 3] <- 13
+
+taskHSumColumn <- colSums(M)
+taskHMeanColumn <- colMeans(M)
+taskHMinColumn <- apply(M, 2, min) # apply min to the second dimension of M
+taskHMaxColumn <- apply(M, 2, max) # the same with max
+
+taskHSumRow <- rowSums(M)
+taskHMeanRow <- rowMeans(M)
+taskHMinRow <- apply(M, 1, min) # apply min to the first dimension (row) of M
+taskHMaxRow <- apply(M, 1, max) # the same with max
+
+taskI <- matrix(c(apply(M, 1, min), apply(M, 1, max)), ncol = 2)
+colnames(taskI) <- c("min", "max")
+rownames(taskI) <- paste("row", 1:nrow(taskI))
