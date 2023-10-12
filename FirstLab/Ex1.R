@@ -88,7 +88,8 @@ taskJ1 <- replace(x, x == 0, NA); taskJ2 <- sum(x)
 
 # Exercise 1.5
 matrix_elements <- c(1, 2, 3, 0, 1, 4, 5, 6, 0)
-M <- matrix(matrix_elements, nrow = 3, ncol = 3)
+# M <- matrix(matrix_elements, nrow = 3, ncol = 3)
+M <- array(matrix_elements, dim = c(3, 3)) # a more generic way
 taskA <- dim(M)
 taskB <- t(M)
 taskC <- M %*% M # matrix square operator. M^2 squares element-wise
