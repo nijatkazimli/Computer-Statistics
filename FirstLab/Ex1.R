@@ -129,3 +129,5 @@ taskHMaxRow <- apply(M, 1, max) # the same with max
 taskI <- matrix(c(apply(M, 1, min), apply(M, 1, max)), ncol = 2)
 colnames(taskI) <- c("min", "max")
 rownames(taskI) <- paste("row", 1:nrow(taskI))
+
+# Note: cbind(...) is similar to c(...) but it also binds the row, col names
