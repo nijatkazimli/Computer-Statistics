@@ -131,3 +131,19 @@ colnames(taskI) <- c("min", "max")
 rownames(taskI) <- paste("row", 1:nrow(taskI))
 
 # Note: cbind(...) is similar to c(...) but it also binds the row, col names
+
+
+# Exercise 1.6
+x <- data.frame(Titanic) # IMPORTANT
+taskA <- typeof(x)
+taskBi <- class(x); taskBii <- dim(x)
+View(x)   # to view the table
+
+taskC <- subset(x, Age == "Adult")
+View(taskC)
+
+taskD <- subset(x, Sex == "Male")
+View(taskD)
+
+taskE <- subset(x, Age == "Adult " & Sex == "Male") # TODO fix
+View(taskE)
