@@ -163,3 +163,36 @@ rownames(taskBi) <- paste("std", 1:nrow(taskBi), sep = "")
 View(taskBi)
 taskBii <- taskBi["std1", ] # the second argument is the column we want to
 View(taskBii)               # extract. Empty means all columns.
+
+
+# Exercise 1.8
+x_values <- seq(2, 4, by = 0.1)
+taskAvalues <- exp(x_values) * cos(x_values)
+taskA <- data.frame(x = x_values, y = taskAvalues)
+View(taskA)
+
+taskB <- sum(seq(2, 10))
+taskC <- sum(seq(2, 100, by = 2))
+taskD <- log(prod(seq(1, 50)))
+
+taskE <- 0
+for (i in 1:10) {
+  for (j in 1:20) {
+    taskE <- taskE + i*j
+  }
+}
+
+taskF <- 0
+for (i in 1:3) {
+  for (j in 1:4) {
+    taskF <- taskF + i^j
+  }
+}
+
+taskGhelper <- 0
+for (i in 1:10) {
+  for (j in 1:20) {
+    taskGhelper <- taskGhelper + i^j
+  }
+}
+taskG <- sqrt(taskGhelper)
