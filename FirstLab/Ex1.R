@@ -162,4 +162,4 @@ taskBi <- data.frame(
 rownames(taskBi) <- paste("std", 1:nrow(taskBi), sep = "")
 View(taskBi)
 taskBii <- taskBi["std1", ] # the second argument is the column we want to
-View(taskBii)               # extract. Empty means all columns
+View(taskBii)               # extract. Empty means all columns.
