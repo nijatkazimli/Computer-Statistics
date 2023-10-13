@@ -147,3 +147,19 @@ View(taskD)
 
 taskE <- subset(x, Age == "Adult" & Sex == "Male")
 View(taskE)
+
+
+# Exercise 1.7
+taskAhelper <- matrix(c(1, 5, 15, 2, 6, 36), ncol = 2) 
+taskA <- as.data.frame(taskAhelper)
+View(taskA)
+
+taskBi <- data.frame(
+  name = c("Kowalski", "Nowak"),
+  age = c(21, 23),
+  student = c(TRUE, FALSE)
+)
+rownames(taskBi) <- paste("std", 1:nrow(taskBi), sep = "")
+View(taskBi)
+taskBii <- taskBi["std1", ] # the second argument is the column we want to
+View(taskBii)               # extract. Empty means all columns
