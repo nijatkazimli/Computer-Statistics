@@ -196,3 +196,24 @@ for (i in 1:10) {
   }
 }
 taskG <- sqrt(taskGhelper)
+
+
+# Exercise 1.9
+minmax <- function(x, n) {
+  if (n > length(x)) {
+    return("argument too long")
+  }
+  
+  x_sorted = sort(x)
+  min_values <- head(sort(x), n)
+  
+  max_values <- tail(sort(x), n)
+  
+  return(list(smallest = min_values, largest = max_values))
+}
+
+# Example usage:
+x <- c(5, 3, 8, 1, 9, 2, 4, 7, 6)
+n <- 3
+result <- minmax(x, n)
+print(result)
