@@ -240,3 +240,14 @@ taskBii <- sapply(taskList, sd) # sd(...) stands for standard deviation
 
 # Exercise 1.11
 curve(x^3 - x^2 + x - 1, from = -2, to = 3)
+
+
+# Exercise 1.12
+x <- data.frame(cars)
+View(x)
+x$speed = x$speed * 1.61
+x$dist = x$dist * 0.3
+plot(x$speed, x$dist, xlab = "speed", ylab = "distance", 
+     main = "Speed vs Distance", pch = 10, col = "blue"
+)
+abline(lm(dist ~ speed, data = x), col = "red") # a regression line
