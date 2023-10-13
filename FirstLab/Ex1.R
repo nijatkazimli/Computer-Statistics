@@ -145,5 +145,5 @@ View(taskC)
 taskD <- subset(x, Sex == "Male")
 View(taskD)
 
-taskE <- subset(x, Age == "Adult " & Sex == "Male") # TODO fix
+taskE <- subset(x, Age == "Adult" & Sex == "Male")
 View(taskE)
