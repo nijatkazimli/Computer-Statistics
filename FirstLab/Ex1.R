@@ -236,3 +236,7 @@ taskBii <- sapply(taskList, sd) # sd(...) stands for standard deviation
 # similar to lapply(), but it attempts to simplify the result into a vector or
 # matrix when possible. If the results are of consistent length and type,
 # it will simplify the output.
+
+
+# Exercise 1.11
+curve(x^3 - x^2 + x - 1, from = -2, to = 3)
