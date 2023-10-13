@@ -205,15 +205,34 @@ minmax <- function(x, n) {
   }
   
   x_sorted = sort(x)
-  min_values <- head(sort(x), n)
+  min_values <- head(x_sorted, n)
   
-  max_values <- tail(sort(x), n)
+  max_values <- rev(tail(x_sorted, n))
   
   return(list(smallest = min_values, largest = max_values))
 }
 
-# Example usage:
 x <- c(5, 3, 8, 1, 9, 2, 4, 7, 6)
-n <- 3
+n <- 5
 result <- minmax(x, n)
 print(result)
+
+
+# Exercise 1.10
+taskList <- list(
+  x = c(1, 3, 9, 15),
+  y = c(5, 3, 19)
+)
+taskA <- sapply(taskList, sum)
+
+taskBi <- sapply(taskList, mean)
+taskBii <- sapply(taskList, sd) # sd(...) stands for standard deviation
+
+# lapply()
+# The output is always a list, even if the result of applying the function is 
+# a vector or a different data structure.
+
+# sapply()
+# similar to lapply(), but it attempts to simplify the result into a vector or
+# matrix when possible. If the results are of consistent length and type,
+# it will simplify the output.
