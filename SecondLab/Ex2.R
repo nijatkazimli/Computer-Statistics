@@ -39,3 +39,21 @@ task <- as.data.frame(as.numeric(table(x$cyl)))
 colnames(task) <- "Freuency"
 rownames(task) <- paste(as.data.frame(table(x$cyl))$Var1, "cylinders")
 View(task)
+
+
+# Exercise 2.3
+library(coin)
+x <- data.frame(malformations)
+
+taskA <- cbind(xtabs(~malformation + consumption, data = x))
+View(taskA)
+taskA <- addmargins(taskA) # to add marginal sums
+
+taskBi <- table(x$consumption)
+taskBii <- table(x$malformation)
+
+taskC <- taskA["Present", "1-2"] / sum(taskA[ , "1-2"])
+
+# taskD
+x$consumption_high <- ifelse(x$consumption %in% c("0", "1-2"), "No", "Yes")
+x$consumption_high <- as.factor(x$consumption_high)
