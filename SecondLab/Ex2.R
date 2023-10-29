@@ -57,3 +57,40 @@ taskC <- taskA["Present", "1-2"] / sum(taskA[ , "1-2"])
 # taskD
 x$consumption_high <- ifelse(x$consumption %in% c("0", "1-2"), "No", "Yes")
 x$consumption_high <- as.factor(x$consumption_high)
+
+taskEi <- cbind(xtabs(~malformation + consumption_high, data = x))
+taskEi <- addmargins(taskEi)
+View(taskEi)
+
+taskEii <- cbind(table(x$consumption_high, x$malformation))
+View(taskEii)
+taskEii <- addmargins(taskEii)
+View(taskEii)
+
+taskFhelperI <- taskEi["Present", "Yes"] / sum(taskEi[, "Yes"])
+taskFhelperII <- taskEi["Present", "No"] / sum(taskEi[, "No"])
+taskF <- taskFhelperI / taskFhelperII
+
+
+# Exercise 2.4
+x <- data.frame(HairEyeColor)
+
+taskAi <- table(x$Hair, dnn = "Hair")
+taskAii <- table(x$Eye, dnn = "Eye")
+taskAiii <- table(x$Sex, dnn = "Sex")
+
+taskBHelper <- subset(x, x$Hair == "Brown" & x$Sex == "Male")
+barplot(taskBHelper$Freq) # x already has a column named freq for some reason
+
+taskCHelper <- subset(x, x$Eye == "Blue" & x$Sex == "Female")
+barplot(taskCHelper$Freq)
+
+
+# Exercise 2.6
+install.packages("e1071")
+library("e1071")
+x <- data.frame(airquality)
+taskI <- skewness(x$Wind)
+taskII <- skewness(x$Temp)
+taskIII <- kurtosis(x$Wind)
+taskIV <- kurtosis(x$Temp)
