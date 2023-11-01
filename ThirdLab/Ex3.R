@@ -82,3 +82,18 @@ qqline(data$Temp)
 x <- 0:10
 plot(dbinom(x, size = 10, prob = 0.3), main = "Bin(10, 0.3)")
 plot(dpois(x, lambda = 2), main = "Pois(2)")
+
+
+# Exercise 3.6
+taskA <- dbinom(2, size = 4, prob = 0.5)
+taskB <- pbinom(2, size = 4, prob = 0.5)
+taskC <- 1 - pbinom(1, size = 4, prob = 0.5)
+
+binomial_pmf <- function(k, n, p) {
+  binomial_coeff <- factorial(n) / (factorial(k) * factorial(n - k))
+  probability <- binomial_coeff * p^k * (1 - p)^(n - k)
+  return(probability)
+}
+taskAtest <- binomial_pmf(2, 4, 0.5)
+taskBtest <- sum(binomial_pmf(0:2, 4, 0.5))
+taskCtest <- 1 - sum(binomial_pmf(0:1, 4, 0.5))
