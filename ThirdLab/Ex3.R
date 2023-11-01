@@ -21,30 +21,34 @@ taskED <- xqnorm(0.9, mean = 1, sd = 4)
 
 
 # Exercise 3.2
-# Parameters for the normal distributions
 means <- c(0, 0, 0, 1, 2, 3)
 variances <- c(1, 4, 9, 1, 1, 1)
 labels <- c("N(0,1)", "N(0,4)", "N(0,9)", "N(1,1)", "N(2,1)", "N(3,1)")
 
-# Create the plotting area with two rows
-par(mfrow = c(2, 1))
+par(mfrow = c(2, 1)) # 2 row, 1 column plot area
 
-# PDF plot
-plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 0.5), xlab = "X", ylab = "PDF", main = "PDF")
+plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 1),
+     xlab = "X", ylab = "PDF", main = "PDF")
+# type = "n"    plot without any points or lines (empty)
 for (i in 1:length(means)){
-  curve(dnorm(x, mean = means[i], sd = sqrt(variances[i])), col = i, lwd = 2, add = TRUE)
+  curve(dnorm(x, mean = means[i], sd = variances[i]),
+        col = i, lwd = 2, add = TRUE)
+  # lwd - line width
+  # col - color
+  # add - add to an existing curve
 }
-legend("topright", legend = labels, col = 1:length(means), lty = 1, title = "Distribution")
+legend("topright", legend = labels,
+       col = 1:length(means), title = "Distribution")
 
-# CDF plot
-plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 1), xlab = "X", ylab = "CDF", main = "CDF")
+plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 1),
+     xlab = "X", ylab = "CDF", main = "CDF")
 for (i in 1:length(means)) {
-  curve(pnorm(x, mean = means[i], sd = sqrt(variances[i])), col = i, lwd = 2, add = TRUE)
+  curve(pnorm(x, mean = means[i], sd = variances[i]),
+        col = i, lwd = 2, add = TRUE)
 }
-legend("topright", legend = labels, col = 1:length(means), lty = 1, title = "Distribution")
+legend("topright", legend = labels, 
+       col = 1:length(means), title = "Distribution")
 
-# Reset the plotting area to default
 par(mfrow = c(1, 1))
-
 
 
