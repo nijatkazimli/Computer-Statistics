@@ -52,3 +52,33 @@ legend("topright", legend = labels,
 par(mfrow = c(1, 1))
 
 
+# Exercise 3.3
+x <- seq(-5, 5, by = 0.1)
+pdf_normal <- dnorm(x, mean = 0, sd = 1)
+pdf_t1 <- dt(x, df = 1) # dt - pdf of Student t distribution
+pdf_t2 <- dt(x, df = 2)
+pdf_t10 <- dt(x, df = 10)
+pdf_t100 <- dt(x, df = 100)
+
+plot(x, pdf_normal, col = "red", xlab = "X", ylab = "PDF", main = "PDFs")
+points(x, pdf_t1, col = "blue")
+points(x, pdf_t2, col = "green")
+points(x, pdf_t10, col = "yellow")
+points(x, pdf_t100, col = "black")
+
+
+# Exercise 3.4
+data <- data.frame(airquality)
+hist(data$Temp, freq = FALSE, main = "Histogram", xlab = "x")
+curve(dnorm(x, mean(data$Temp), sd(data$Temp)), add = TRUE, lwd = 2)
+# bell shape - normal distribution
+
+qqnorm(data$Temp)
+qqline(data$Temp)
+# closer to the straight line - normal distribution
+
+
+# Exercise 3.5
+x <- 0:10
+plot(dbinom(x, size = 10, prob = 0.3), main = "Bin(10, 0.3)")
+plot(dpois(x, lambda = 2), main = "Pois(2)")
