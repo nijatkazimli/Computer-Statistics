@@ -100,6 +100,13 @@ boxplot(taskC)
 hist(taskC)
 density(taskC)
 
+taskD <- x$VEGF
+summary(taskD)
+boxplot(taskD)
+hist(taskD)
+density(taskD)
+# ASSESSMENT POSSIBLE
+
 
 # Exercise 2.6
 install.packages("e1071")
