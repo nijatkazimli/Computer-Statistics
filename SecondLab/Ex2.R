@@ -86,6 +86,21 @@ taskCHelper <- subset(x, x$Eye == "Blue" & x$Sex == "Female")
 barplot(taskCHelper$Freq)
 
 
+# Exercise 2.5
+x <- read.csv("data_tumor.csv", sep = ";")
+summary(x)
+
+taskB <- na.omit(x$receptors.estrogen)
+taskB <- table(taskB)
+barplot(taskB)
+
+taskC <- x$age
+summary(taskC)
+boxplot(taskC)
+hist(taskC)
+density(taskC)
+
+
 # Exercise 2.6
 install.packages("e1071")
 library("e1071")
