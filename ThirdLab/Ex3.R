@@ -97,3 +97,41 @@ binomial_pmf <- function(k, n, p) {
 taskAtest <- binomial_pmf(2, 4, 0.5)
 taskBtest <- sum(binomial_pmf(0:2, 4, 0.5))
 taskCtest <- 1 - sum(binomial_pmf(0:1, 4, 0.5))
+
+
+# Exercise 3.7
+n_samples <- 10000
+count <- 0
+cumulative_fractions <- numeric(n_samples)
+for (i in 1:n_samples) {
+  U1 <- runif(1, 0, 1)
+  U2 <- runif(1, 0, 1)
+  U3 <- runif(1, 0, 1)
+  
+  S <- U1 + U2 + U3
+  
+  if (S<1.5) {
+    count <- count + 1
+  }
+  cumulative_fractions[i] <- count / i
+}
+
+approximate_prob <- count / n_samples
+
+IrwinHall <- function(x, n) {
+  if (x > n) {
+    return("invalid argument")
+  }
+  result <- 0
+  for (k in 0:floor(x)) {
+    term <- (-1)^k * choose(n, k) * (x - k)^n
+    result <- result + term
+  }
+  result <- result / factorial(n)
+  return(result)
+}
+
+exact_prob <- IrwinHall(1.5, 3)
+relative_error <- abs(exact_prob - approximate_prob) / abs(exact_prob)
+
+plot(1:n_samples, cumulative_fractions)
