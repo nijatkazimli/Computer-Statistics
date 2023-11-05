@@ -2,22 +2,22 @@ rm(list = ls())
 
 # Exercise set 3
 # Exercise 3.1
-taskA <- dnorm(0, mean = 1, sd = 4)
-taskB <- pnorm(5, mean = 1, sd = 4)
+taskA <- dnorm(0, mean = 1, sd = 2)
+taskB <- pnorm(5, mean = 1, sd = 2)
 
 # (c) compute P(X > 2.5), P(1 <= X <= 4).
-taskCi <- 1 - pnorm(2.5, mean = 1, sd = 4)
-taskCii <- pnorm(4, mean = 1, sd = 4) - pnorm(1, mean = 1, sd = 4)
+taskCi <- 1 - pnorm(2.5, mean = 1, sd = 2)
+taskCii <- pnorm(4, mean = 1, sd = 2) - pnorm(1, mean = 1, sd = 2)
 
-taskD <- qnorm(0.9, mean = 1, sd = 4)
-taskDtest <- pnorm(6.1262062621784, mean = 1, sd = 4)
+taskD <- qnorm(0.9, mean = 1, sd = 2)
+taskDtest <- pnorm(6.1262062621784, mean = 1, sd = 2)
 
 install.packages("mosaic") # enough to run once to install
 library(mosaic)
 taskEB <- xpnorm(5, mean = 1, sd = 4)
-taskECi <- 1 - xpnorm(2.5, mean = 1, sd = 4)
-taskECii <- xpnorm(4, mean = 1, sd = 4) - xpnorm(1, mean = 1, sd = 4)
-taskED <- xqnorm(0.9, mean = 1, sd = 4)
+taskECi <- 1 - xpnorm(2.5, mean = 1, sd = 2)
+taskECii <- xpnorm(4, mean = 1, sd = 2) - xpnorm(1, mean = 1, sd = 2)
+taskED <- xqnorm(0.9, mean = 1, sd = 2)
 
 
 # Exercise 3.2
@@ -27,23 +27,23 @@ labels <- c("N(0,1)", "N(0,4)", "N(0,9)", "N(1,1)", "N(2,1)", "N(3,1)")
 
 par(mfrow = c(2, 1)) # 2 row, 1 column plot area
 
-plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 1),
+plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 0.5),
      xlab = "X", ylab = "PDF", main = "PDF")
 # type = "n"    plot without any points or lines (empty)
 for (i in 1:length(means)){
-  curve(dnorm(x, mean = means[i], sd = variances[i]),
+  curve(dnorm(x, mean = means[i], sd = sqrt(variances[i])),
         col = i, lwd = 2, add = TRUE)
   # lwd - line width
   # col - color
   # add - add to an existing curve
 }
 legend("topright", legend = labels,
-       col = 1:length(means), title = "Distribution")
+       col = 1:length(means), title = "Distribution", lty = 1)
 
-plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 1),
+plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 0.5),
      xlab = "X", ylab = "CDF", main = "CDF")
 for (i in 1:length(means)) {
-  curve(pnorm(x, mean = means[i], sd = variances[i]),
+  curve(pnorm(x, mean = means[i], sd = sqrt(variances[i])),
         col = i, lwd = 2, add = TRUE)
 }
 legend("topright", legend = labels, 
