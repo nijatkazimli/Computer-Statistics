@@ -40,14 +40,14 @@ for (i in 1:length(means)){
 legend("topright", legend = labels,
        col = 1:length(means), title = "Distribution", lty = 1)
 
-plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 0.5),
+plot(1, type = "n", xlim = c(-10, 10), ylim = c(0, 1),
      xlab = "X", ylab = "CDF", main = "CDF")
 for (i in 1:length(means)) {
   curve(pnorm(x, mean = means[i], sd = sqrt(variances[i])),
         col = i, lwd = 2, add = TRUE)
 }
 legend("topright", legend = labels, 
-       col = 1:length(means), title = "Distribution")
+       col = 1:length(means), title = "Distribution", lty = 1)
 
 par(mfrow = c(1, 1))
 
@@ -119,7 +119,7 @@ for (i in 1:n_samples) {
 approximate_prob <- count / n_samples
 
 IrwinHall <- function(x, n) {
-  if (x > n) {
+  if (x > n | x < 0) {
     return("invalid argument")
   }
   result <- 0
