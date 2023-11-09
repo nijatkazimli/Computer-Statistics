@@ -135,3 +135,4 @@ exact_prob <- IrwinHall(1.5, 3)
 relative_error <- abs(exact_prob - approximate_prob) / abs(exact_prob)
 
 plot(1:n_samples, cumulative_fractions)
+abline(h = exact_prob, lwd = 3)
