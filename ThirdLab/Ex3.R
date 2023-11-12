@@ -136,3 +136,27 @@ relative_error <- abs(exact_prob - approximate_prob) / abs(exact_prob)
 
 plot(1:n_samples, cumulative_fractions)
 abline(h = exact_prob, lwd = 3)
+
+
+# Exercise 3.8
+set.seed(123)
+taskA <- rnorm(10^3, mean = 2, sd = 3)
+
+# i
+quantiles_025 <- quantile(taskA, 0.25)
+quantiles_075 <- quantile(taskA, 0.75)
+
+theoretical_quantiles_025 <- qnorm(0.25, mean = 2, sd = 3)
+theoretical_quantiles_075 <- qnorm(0.75, mean = 2, sd = 3)
+
+# ii
+hist(taskA, freq = FALSE, ylim = c(0, 0.15))
+curve(dnorm(x, mean = 2, sd = 3), add = TRUE, lwd = 2)
+
+# iii
+ecdf_sample <- ecdf(taskA)
+plot(ecdf_sample)
+curve(pnorm(x, mean = 2, sd = 3), add = TRUE)
+
+
+# Exercise 3.9
