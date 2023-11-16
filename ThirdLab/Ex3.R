@@ -160,3 +160,26 @@ curve(pnorm(x, mean = 2, sd = 3), add = TRUE)
 
 
 # Exercise 3.9
+
+
+
+
+# 3.8b
+# Set parameters
+mean_X1 <- 2
+variance_X1 <- 9
+n <- 10^3
+r <- 10^4
+
+# Generate r realizations of the sample
+samples <- matrix(rnorm(n * r, mean = mean_X1, sd = sqrt(variance_X1)), ncol = n)
+
+# Compute sample means for each realization
+sample_means <- rowMeans(samples)
+
+# Calculate the standardized sample means
+standardized_means <- (sample_means - mean_X1) / sqrt(variance_X1 / n)
+
+# Plot histogram and the normal distribution
+hist(standardized_means, prob = TRUE, col = 'blue', main = 'Histogram and Standard Normal PDF')
+curve(dnorm(x), add = TRUE, col = 'black', lty = 2, lwd = 2)
