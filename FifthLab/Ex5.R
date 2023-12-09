@@ -86,3 +86,58 @@ t_score <- qt(1 - alpha / 2, sample_size - 1)
          sample_mean + sample_standard_deviation / sqrt(sample_size) * t_score))
 # it is narrower
 rm(list = ls())
+
+
+# Exercise 5.4
+# Set random seed for reproducibility
+set.seed(123)
+
+# Parameters
+M <- 100  # Number of samples
+n <- 50   # Sample size
+mu <- 0   # True mean
+sigma <- 1 # True standard deviation
+
+# Create empty vectors to store results
+ci_mu <- matrix(NA, nrow = M, ncol = 2)
+ci_sigma2 <- matrix(NA, nrow = M, ncol = 2)
+coverage_mu <- rep(NA, M)
+coverage_sigma2 <- rep(NA, M)
+
+# Generate samples and compute confidence intervals
+for (i in 1:M) {
+  # Generate a sample from N(0, 1)
+  sample_data <- rnorm(n, mean = mu, sd = sigma)
+  
+  # (a) Compute 95% CI for µ, given that σ^2 is unknown
+  sample_mean <- mean(sample_data)
+  sample_sd <- sd(sample_data)
+  t_score <- qt(0.975, df = n - 1)
+  ci_mu[i, ] <- c(sample_mean - t_score * (sample_sd / sqrt(n)), sample_mean + t_score * (sample_sd / sqrt(n)))
+  coverage_mu[i] <- mu >= ci_mu[i, 1] & mu <= ci_mu[i, 2]
+  
+  # (b) Compute 95% CI for σ^2, given that µ is unknown
+  chi2_lower <- qchisq(0.025, df = n - 1)
+  chi2_upper <- qchisq(0.975, df = n - 1)
+  ci_sigma2[i, ] <- c(((n - 1) * sample_sd^2) / chi2_upper, ((n - 1) * sample_sd^2) / chi2_lower)
+  coverage_sigma2[i] <- sigma^2 >= ci_sigma2[i, 1] & sigma^2 <= ci_sigma2[i, 2]
+}
+
+# Compute coverage rates
+coverage_rate_mu <- mean(coverage_mu)
+coverage_rate_sigma2 <- mean(coverage_sigma2)
+
+# Print coverage rates
+cat("Coverage Rate for µ:", coverage_rate_mu, "\n")
+cat("Coverage Rate for σ^2:", coverage_rate_sigma2, "\n")
+
+# Create coverage plots
+par(mfrow = c(2, 1))
+plot(ci_mu[, 1], type = "l", col = "blue", ylim = c(min(ci_mu), max(ci_mu)), ylab = "CI for µ", xlab = "Sample")
+lines(ci_mu[, 2], col = "blue")
+abline(h = mu, col = "red", lty = 2)
+
+plot(ci_sigma2[, 1], type = "l", col = "green", ylim = c(min(ci_sigma2), max(ci_sigma2)), ylab = "CI for σ^2", xlab = "Sample")
+lines(ci_sigma2[, 2], col = "green")
+abline(h = sigma^2, col = "red", lty = 2)
+
