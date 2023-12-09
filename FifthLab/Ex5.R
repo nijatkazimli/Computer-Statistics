@@ -41,3 +41,12 @@ b <- qchisq(alpha / 2, sample_size - 1)
 (ci_var <- c((sample_size - 1)^2 / a, (sample_size - 1)^2 / b))
 (ci_sd <- sqrt(ci_var))
 rm(list = ls())
+
+
+# Exercise 5.2
+sample_size <- 20
+sample_standard_deviation <- 2.3
+alpha <- 0.1
+a <- qchisq(1 - alpha / 2, sample_size - 1)
+b <- qchisq(alpha / 2, sample_size - 1)
+(ci <- c((sample_size - 1)^2 / a, (sample_size - 1)^2 / b))
