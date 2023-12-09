@@ -160,3 +160,12 @@ bootstrap_samples <- function(data, num_samples) {
 bootstrap_data <- bootstrap_samples(data, 1000)
 bootstrap_means <- apply(bootstrap_data, 1, mean)
 (ci_bootstrap <- quantile(bootstrap_means, c(alpha/2, 1 - alpha/2)))
+
+
+# Exercise 5.6
+alpha <- 0.05
+sample_prop <- 115/400
+sample_size <- 400
+z_score <- qnorm(1 - alpha / 2)
+(ci <- c(sample_prop - sqrt(sample_prop*(1-sample_prop)/sample_size)*z_score,
+         sample_prop + sqrt(sample_prop*(1-sample_prop)/sample_size)*z_score))
