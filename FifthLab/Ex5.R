@@ -169,3 +169,47 @@ sample_size <- 400
 z_score <- qnorm(1 - alpha / 2)
 (ci <- c(sample_prop - sqrt(sample_prop*(1-sample_prop)/sample_size)*z_score,
          sample_prop + sqrt(sample_prop*(1-sample_prop)/sample_size)*z_score))
+
+
+# Exercise 5.7
+M <- 1000
+n <- 20
+p_values <- c(0.4, 0.9)
+
+calculate_coverage_rate <- function(conf_int, true_p) {
+  coverage <- (conf_int[1] <= true_p) & (conf_int[2] >= true_p)
+  return(coverage)
+}
+
+set.seed(123)
+
+for (p in p_values) {
+  true_p <- p
+  coverage_wald <- coverage_score <- coverage_exact <- numeric(M)
+  
+  for (i in 1:M) {
+    sample_data <- rbinom(n, 1, true_p)
+    
+    # Wald interval
+    p_hat_wald <- mean(sample_data)
+    se_wald <- sqrt(p_hat_wald * (1 - p_hat_wald) / n)
+    conf_int_wald <- c(p_hat_wald - 1.96 * se_wald, p_hat_wald + 1.96 * se_wald)
+    coverage_wald[i] <- calculate_coverage_rate(conf_int_wald, true_p)
+    
+    # Score interval
+    p_hat_score <- p_hat_wald
+    se_score <- sqrt(p_hat_score * (1 - p_hat_score) / n)
+    conf_int_score <- c(p_hat_score - 1.96 * se_score, p_hat_score + 1.96 * se_score)
+    coverage_score[i] <- calculate_coverage_rate(conf_int_score, true_p)
+    
+    # Exact interval
+    conf_int_exact <- binom.test(sum(sample_data), n, conf.level = 0.95)$conf.int
+    coverage_exact[i] <- calculate_coverage_rate(conf_int_exact, true_p)
+  }
+  
+  cat("True Probability:", true_p, "\n")
+  cat("Wald Coverage Rate:", mean(coverage_wald), "\n")
+  cat("Score Coverage Rate:", mean(coverage_score), "\n")
+  cat("Exact Coverage Rate:", mean(coverage_exact), "\n")
+  cat("\n")
+}
