@@ -41,7 +41,7 @@ observed_proportion <- number_of_heads / total_flips
 rm(list = ls())
 
 
-# Exercise 6.5
+# Exercise 6.10
 library(boot)
 total_women <- sum(channing$sex == "Female")
 total_men <- sum(channing$sex == "Male")
