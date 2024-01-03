@@ -39,3 +39,31 @@ observed_proportion <- number_of_heads / total_flips
 (result <- prop.test(number_of_heads, total_flips, p = 0.5, conf.level = 0.90))
 
 rm(list = ls())
+
+
+# Exercise 6.5
+library(boot)
+total_women <- sum(channing$sex == "Female")
+total_men <- sum(channing$sex == "Male")
+total <- total_women + total_men
+
+# a----
+p_observed <- total_women / total
+p_expected <- 4/5
+prop.test(x = total_women, n = total, p = p_expected)
+
+# b----
+entry_men <- channing$entry[channing$sex == "Male"]
+entry_women <- channing$entry[channing$sex == "Female"]
+t.test(entry_men, entry_women)
+
+# c----
+age_80_in_months <- 80*12
+num_men_80 <- sum(channing$sex == "Male" & channing$entry < age_80_in_months)
+num_women_80 <- sum(channing$sex == "Female" & channing$entry < age_80_in_months)
+
+(prop_test_result <- prop.test(x = c(num_women_80, num_men_80),
+                              n = c(total_women, total_men),
+                              alternative = "greater"))
+
+rm(list = ls())
