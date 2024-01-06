@@ -43,27 +43,121 @@ rm(list = ls())
 
 # Exercise 6.10
 library(boot)
-total_women <- sum(channing$sex == "Female")
-total_men <- sum(channing$sex == "Male")
-total <- total_women + total_men
+data(channing)
 
 # a----
-p_observed <- total_women / total
-p_expected <- 4/5
-prop.test(x = total_women, n = total, p = p_expected)
+gender <- channing$sex
+
+p_w <- sum(gender == "Female") / length(gender)
+p_m <- sum(gender == "Male") / length(gender)
+
+# Set the expected ratio based on the null hypothesis
+expected_ratio <- 4
+p_w_expected <- expected_ratio / (1 + expected_ratio)
+
+# Calculate the expected proportions
+p_m_expected <- 1 - p_w_expected
+
+# Calculate the standard error of the difference in proportions
+se_diff <- sqrt(p_w_expected * p_m_expected * (1/sum(gender == "Female") + 1/sum(gender == "Male")))
+
+# Calculate the Z-test statistic
+z_stat <- (p_w - p_w_expected) / se_diff
+
+# Calculate the p-value
+p_value <- 2 * pnorm(abs(z_stat), lower.tail = FALSE)
+
+# Set the significance level
+alpha <- 0.05
+
+# Check if the p-value is less than the significance level
+if (p_value < alpha) {
+  cat("Reject the null hypothesis. There is evidence that the ratio of women to men is not 4:1.")
+} else {
+  cat("Fail to reject the null hypothesis. There is not enough evidence to suggest a difference in the ratio.")
+}
 
 # b----
-entry_men <- channing$entry[channing$sex == "Male"]
-entry_women <- channing$entry[channing$sex == "Female"]
-t.test(entry_men, entry_women)
+age_men <- channing$entry[channing$sex == "Male"]
+age_women <- channing$entry[channing$sex == "Female"]
 
+# Calculate the means
+mean_men <- mean(age_men)
+mean_women <- mean(age_women)
+
+# Calculate the standard deviations
+sd_men <- sd(age_men)
+sd_women <- sd(age_women)
+
+# Calculate the sample sizes
+n_men <- length(age_men)
+n_women <- length(age_women)
+
+# Calculate the standard errors of the means
+se_men <- sd_men / sqrt(n_men)
+se_women <- sd_women / sqrt(n_women)
+
+# Calculate the pooled standard error
+pooled_se <- sqrt((sd_men^2 / n_men) + (sd_women^2 / n_women))
+
+# Calculate the t-statistic
+t_stat <- (mean_men - mean_women) / pooled_se
+
+# Calculate the degrees of freedom
+df <- n_men + n_women - 2
+
+# Calculate the two-tailed p-value
+p_value <- 2 * pt(abs(t_stat), df, lower.tail = FALSE)
+
+# Set the significance level
+alpha <- 0.05
+
+# Check if the p-value is less than the significance level
+if (p_value < alpha) {
+  cat("Reject the null hypothesis. There is evidence that the mean age of entry is different for men and women.")
+} else {
+  cat("Fail to reject the null hypothesis. There is not enough evidence to suggest a difference in the mean age of entry.")
+}
 # c----
-age_80_in_months <- 80*12
-num_men_80 <- sum(channing$sex == "Male" & channing$entry < age_80_in_months)
-num_women_80 <- sum(channing$sex == "Female" & channing$entry < age_80_in_months)
+# Extract age of entry information and gender
+age <- channing$entry / 12
+gender <- channing$sex
 
-(prop_test_result <- prop.test(x = c(num_women_80, num_men_80),
-                              n = c(total_women, total_men),
-                              alternative = "greater"))
+# Create a binary variable indicating whether the entry age is before 80
+before_80 <- ifelse(age < 80, 1, 0)
 
-rm(list = ls())
+# Create contingency table for men and women
+table_gender_before_80 <- table(gender, before_80)
+
+# Extract counts for men and women entering before 80
+count_men_before_80 <- table_gender_before_80["Male", 2]
+count_women_before_80 <- table_gender_before_80["Female", 2]
+
+# Calculate proportions for men and women entering before 80
+prop_men_before_80 <- count_men_before_80 / sum(table_gender_before_80["Male", ])
+prop_women_before_80 <- count_women_before_80 / sum(table_gender_before_80["Female", ])
+
+# Calculate the observed difference in proportions
+observed_diff <- prop_women_before_80 - prop_men_before_80
+
+# Assuming large enough sample sizes, perform a z-test for proportions
+# Calculate standard error of the difference
+se_diff <- sqrt((prop_men_before_80 * (1 - prop_men_before_80)) / sum(table_gender_before_80["Male", ]) +
+                  (prop_women_before_80 * (1 - prop_women_before_80)) / sum(table_gender_before_80["Female", ]))
+
+# Calculate the z-statistic
+z_stat <- observed_diff / se_diff
+
+# Calculate the one-tailed p-value
+p_value <- pnorm(z_stat, lower.tail = FALSE)
+
+# Set the significance level
+alpha <- 0.05
+
+# Check if the p-value is less than the significance level
+if (p_value < alpha) {
+  cat("Reject the null hypothesis. There is evidence that the proportion of women entering before 80 is bigger than for men.")
+} else {
+  cat("Fail to reject the null hypothesis. There is not enough evidence to suggest a difference in proportions.")
+}
+
