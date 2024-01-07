@@ -41,6 +41,30 @@ observed_proportion <- number_of_heads / total_flips
 rm(list = ls())
 
 
+# Exercise 6.8
+test1 <- c(3, 5, 9, 8, 6, 7)
+test2 <- c(2, 6, 7, 6, 5, 4)
+data_length <- length(test1)
+
+mean1 <- mean(test1)
+mean2 <- mean(test2)
+
+sd1 <- sd(test1)
+sd2 <- sd(test2)
+
+se_diff <- sqrt((sd1^2 + sd2^2) / data_length)
+t_stat <- (mean1 - mean2) / se_diff
+df <- ((sd1^2 + sd2^2) / data_length)^2 / (((sd1^2 + sd2^2) / data_length)^2 / 5)
+
+critical_point <- qt(0.90, df)
+
+if (t_stat > critical_point) {
+  cat("Reject the null hypothesis. There is enough evidence to suggest that the true mean for Test 1 is higher than Test 2.\n")
+} else {
+  cat("Fail to reject the null hypothesis. There is not enough evidence to suggest a difference in means.\n")
+}
+rm(list = ls())
+
 # Exercise 6.10
 library(boot)
 data(channing)
