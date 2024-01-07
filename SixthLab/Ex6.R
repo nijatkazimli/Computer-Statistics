@@ -65,6 +65,53 @@ if (t_stat > critical_point) {
 }
 rm(list = ls())
 
+
+# Exercise 6.9
+n1 <- 5
+x_sum <- 38.5
+x_bar <- x_sum / n1
+x_sq_sum <- 297.24
+
+n2 <- 7
+y_sum <- 52.4
+y_bar <- y_sum / n2
+y_sq_sum <- 392.93
+
+var1 <- (x_sq_sum - 2*x_bar*x_sum + n1*x_bar^2) / (n1 - 1)
+var2 <- (y_sq_sum - 2*y_bar*y_sum + n2*y_bar^2) / (n2 - 1)
+
+# a----
+test_statistic <- var1 / var2
+
+df1 <- n1 - 1
+df2 <- n2 - 1
+
+critical_value <- qf(0.95, df1, df2)
+
+if (test_statistic > critical_value) {
+  cat("Reject the null hypothesis. There is enough evidence to suggest that the variances are not equal.\n")
+} else {
+  cat("Fail to reject the null hypothesis. There is not enough evidence to suggest a difference in variances.\n")
+}
+
+# b----
+s_pooled_sq <- ((n1 - 1) * var1 + (n2 - 1) * var2) / (n1 + n2 - 2)
+
+se_diff <- sqrt(s_pooled_sq * (1/n1 + 1/n2))
+
+t_stat <- (x_bar - y_bar) / se_diff
+
+df <- n1 + n2 - 2
+
+critical_value <- qt(0.95, df)
+
+if (abs(t_stat) > critical_value) {
+  cat("Reject the null hypothesis. There is enough evidence to suggest that the means are not equal.\n")
+} else {
+  cat("Fail to reject the null hypothesis. There is not enough evidence to suggest a difference in means.\n")
+}
+rm(list = ls())
+
 # Exercise 6.10
 library(boot)
 data(channing)
