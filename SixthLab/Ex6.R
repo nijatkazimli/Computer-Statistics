@@ -56,7 +56,7 @@ se_diff <- sqrt((sd1^2 + sd2^2) / data_length)
 t_stat <- (mean1 - mean2) / se_diff
 df <- ((sd1^2 + sd2^2) / data_length)^2 / (((sd1^2 + sd2^2) / data_length)^2 / 5)
 
-critical_point <- qt(0.90, df)
+critical_point <- qt(0.95, df)
 
 if (t_stat > critical_point) {
   cat("Reject the null hypothesis. There is enough evidence to suggest that the true mean for Test 1 is higher than Test 2.\n")
