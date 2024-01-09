@@ -44,7 +44,7 @@ rm(list = ls())
 # Exercise 6.8
 test1 <- c(3, 5, 9, 8, 6, 7)
 test2 <- c(2, 6, 7, 6, 5, 4)
-data_length <- length(test1)
+size <- length(test1)
 
 mean1 <- mean(test1)
 mean2 <- mean(test2)
@@ -52,9 +52,10 @@ mean2 <- mean(test2)
 sd1 <- sd(test1)
 sd2 <- sd(test2)
 
-se_diff <- sqrt((sd1^2 + sd2^2) / data_length)
-t_stat <- (mean1 - mean2) / se_diff
-df <- ((sd1^2 + sd2^2) / data_length)^2 / (((sd1^2 + sd2^2) / data_length)^2 / 5)
+sp_squared <- ((size - 1)*(sd1^2 + sd2^2)) / (2*size - 2)
+
+t_stat <- (mean1 - mean2) / sqrt(sp_squared*2/size)
+df <- 2*size - 2
 
 critical_point <- qt(0.95, df)
 
