@@ -64,8 +64,8 @@ if (t_stat > critical_point) {
 } else {
   cat("Fail to reject the null hypothesis. There is not enough evidence to suggest a difference in means.\n")
 }
-rm(list = ls())
 
+rm(list = ls())
 
 # Exercise 6.9
 n1 <- 5
@@ -106,7 +106,7 @@ df <- n1 + n2 - 2
 
 critical_value <- qt(0.95, df)
 
-if (abs(t_stat) > critical_value) {
+if (t_stat > critical_value) {
   cat("Reject the null hypothesis. There is enough evidence to suggest that the means are not equal.\n")
 } else {
   cat("Fail to reject the null hypothesis. There is not enough evidence to suggest a difference in means.\n")
